@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar />
-    <div class="pt-20">
+    <div class="pt-25">
       <router-view />
     </div>
   </div>
