@@ -1,11 +1,62 @@
 <template>
-    <div class="flex flex-col items-center justify-center space-y-2">
-        <span><v-icon name="fc-info" scale="5"></v-icon></span>
-        <h1 class="text-4xl font-bold">About Page</h1>
-        <div class="max-w-2xl text-center">
-            <p class="mt-4 text-[24px] font-bold">This is the about page of our application.</p>
-            <router-link to="/" class="mt-6 font-semibold text-blue-500 hover:underline text-[20px]">Go back to Home</router-link>
-        </div>
-
-    </div>
+  <div id="app" class="p-8 flex justify-center items-start min-h-screen bg-gray-100">
+    <Autocomplete
+      :items="dataItems"
+      @select="handleSelection"
+      @update:searchTerm="updateSearchTerm"
+      :debounceDelay="400"
+    />
+  </div>
 </template>
+
+<script>
+import Autocomplete from './ItemTemplate.vue';
+
+export default {
+  name: 'App',
+  components: {
+    Autocomplete,
+  },
+  data() {
+    return {
+      dataItems: [
+        'Apple',
+        'Banana',
+        'Cherry',
+        'Date',
+        'Grape',
+        'Lemon',
+        'Mango',
+        'Orange',
+        'Peach',
+        'Pear',
+        'Pineapple',
+        'Strawberry',
+        'Watermelon',
+        'Blueberry',
+        'Raspberry',
+        'Kiwi',
+        'Apricot',
+        'Plum',
+        'Coconut',
+        'Fig',
+      ],
+      selectedItem: null,
+      currentSearchTerm: '',
+    };
+  },
+  methods: {
+    handleSelection(item) {
+      this.selectedItem = item;
+      console.log('Selected:', item);
+      // You can do something with the selected item here, e.g., navigate, fetch data, etc.
+      alert(`You selected: ${item}`);
+    },
+    updateSearchTerm(term) {
+      this.currentSearchTerm = term;
+      console.log('Current search term:', term);
+    },
+  },
+};
+</script>
+
