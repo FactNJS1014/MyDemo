@@ -2,8 +2,8 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "vite build",
-        "dev": "vite"
+        "build": "vite build"
+
     },
     "devDependencies": {
         "@tailwindcss/postcss": "^4.1.7",
@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "@fortawesome/vue-fontawesome": "^3.0.8",
+        "ant-design-vue": "^4.2.6",
         "oh-vue-icons": "^1.0.0-rc3",
         "vue": "^3.5.14",
         "vue-loader": "^17.4.2",

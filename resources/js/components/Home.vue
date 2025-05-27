@@ -7,7 +7,12 @@
 
         </div>
 
-        <button @click="increment">Count is: {{ count }}</button>
+        <p>Count is: {{ count }}</p>
+        <a-float-button  @click="handleClick" :style="{
+            right: '94px',
+            width: '80px',
+            height: '80px',
+        }"/>
     </div>
 
 </template>
@@ -18,12 +23,10 @@ import { ref, onMounted } from 'vue'
 const count = ref(0)
 
 // functions that mutate state and trigger updates
-function increment() {
+function handleClick() {
   count.value++
+   console.log(`The initial count is ${count.value}.`)
 }
 
-// lifecycle hooks
-onMounted(() => {
-  console.log(`The initial count is ${count.value}.`)
-})
+
 </script>

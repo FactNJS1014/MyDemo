@@ -1,62 +1,92 @@
 <template>
-  <div id="app" class="p-8 flex justify-center items-start min-h-screen bg-gray-100">
-    <Autocomplete
-      :items="dataItems"
-      @select="handleSelection"
-      @update:searchTerm="updateSearchTerm"
-      :debounceDelay="400"
-    />
-  </div>
+    <a-table :columns="columns" :data-source="data">
+        <template #headerCell="{ column }">
+            <template v-if="column.key === 'name'">
+                <span>
+                    <smile-outlined />
+                    Name
+                </span>
+            </template>
+        </template>
+        <template #bodyCell="{ column, record }">
+            <template v-if="column.key === 'name'">
+                <p>
+                    {{ record.name }}
+                </p>
+            </template>
+            <template v-else-if="column.key === 'tags'">
+                <span>
+                    <a-tag v-for="tag in record.tags" :key="tag"
+                        :color="tag === 'loser' ? 'volcano' : tag.length > 5 ? 'geekblue' : 'green'">
+                        {{ tag.toUpperCase() }}
+                    </a-tag>
+                </span>
+            </template>
+            <!-- <template v-else-if="column.key === 'action'">
+                <span>
+                    <a>Invite 一 {{ record.name }}</a>
+                    <a-divider type="vertical" />
+                    <a>Delete</a>
+                    <a-divider type="vertical" />
+                    <a class="ant-dropdown-link">
+                        More actions
+                        <down-outlined />
+                    </a>
+                </span>
+            </template> -->
+        </template>
+
+    </a-table>
 </template>
-
-<script>
-import Autocomplete from './ItemTemplate.vue';
-
-export default {
-  name: 'App',
-  components: {
-    Autocomplete,
-  },
-  data() {
-    return {
-      dataItems: [
-        'Apple',
-        'Banana',
-        'Cherry',
-        'Date',
-        'Grape',
-        'Lemon',
-        'Mango',
-        'Orange',
-        'Peach',
-        'Pear',
-        'Pineapple',
-        'Strawberry',
-        'Watermelon',
-        'Blueberry',
-        'Raspberry',
-        'Kiwi',
-        'Apricot',
-        'Plum',
-        'Coconut',
-        'Fig',
-      ],
-      selectedItem: null,
-      currentSearchTerm: '',
-    };
-  },
-  methods: {
-    handleSelection(item) {
-      this.selectedItem = item;
-      console.log('Selected:', item);
-      // You can do something with the selected item here, e.g., navigate, fetch data, etc.
-      alert(`You selected: ${item}`);
+<script setup>
+const columns = [
+    {
+        name: 'Name',
+        dataIndex: 'name',
+        key: 'name',
     },
-    updateSearchTerm(term) {
-      this.currentSearchTerm = term;
-      console.log('Current search term:', term);
+    {
+        title: 'Age',
+        dataIndex: 'age',
+        key: 'age',
     },
-  },
-};
+    {
+        title: 'Address',
+        dataIndex: 'address',
+        key: 'address',
+    },
+    {
+        title: 'Tags',
+        key: 'tags',
+        dataIndex: 'tags',
+    },
+    {
+        title: 'Action',
+        key: 'action',
+    },
+];
+const data = [
+    {
+        key: '1',
+        name: 'John Brown',
+        age: 32,
+        address: 'New York No. 1 Lake Park',
+        tags: ['nice', 'developer'],
+    },
+    {
+        key: '2',
+        name: 'Jim Green',
+        age: 42,
+        address: 'London No. 1 Lake Park',
+        tags: ['loser'],
+    },
+    {
+        key: '3',
+        name: 'Joe Black',
+        age: 32,
+        address: 'Sidney No. 1 Lake Park',
+        tags: ['cool', 'teacher'],
+    },
+];
+
 </script>
-
